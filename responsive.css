@@ -236,3 +236,15 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .cover::before{content:"";position:absolute;inset:-24px;background:url("assets/scene8.webp") center/cover no-repeat;filter:blur(18px) brightness(.58);transform:scale(1.04)}
 .cover-bg{position:relative;object-fit:contain;object-position:center}
 #sceneImage{object-fit:contain;object-position:center}
+
+/* Cross-device touch targets: keep iPad and phone controls comfortably tappable. */
+@media (pointer:coarse),(max-width:1024px),(max-height:620px){
+ .hud nav button,#langBtn,#helpBtn,.save-mini{min-width:44px;min-height:44px}
+}
+@media (max-width:430px){
+ .hud{padding-left:max(8px,var(--safe-left));padding-right:max(8px,var(--safe-right));gap:2px}
+ .brand{min-width:44px;width:44px;padding:0;justify-content:center}
+ .brand b{display:none}
+ .hud nav{gap:0;flex:1;justify-content:flex-end}
+ .hud nav button{width:44px;padding-left:2px;padding-right:2px}
+}

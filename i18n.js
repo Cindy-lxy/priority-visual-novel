@@ -757,7 +757,6 @@ const I18N_EN={
   "开始故事": "Start story",
   "继续上次": "Continue",
   "章节支线 · 轻解谜 · 多结局 · 本机自动存档": "Branches · Light puzzles · Multiple endings · Autosave",
-  "第一章选择不说出口，故事将立即结束": "Stay quiet in Chapter 1 to reach an early ending",
   "让选择，带你走过每一段相遇": "Let your choices lead you through every encounter",
   "章节回看 · 不覆盖主线": "Replay · Main save protected",
   "返回主线": "Return to story",
