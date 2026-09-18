@@ -1,0 +1,238 @@
+/* Responsive geometry only: keep the original colors, artwork and single-row HUD. */
+:root{
+ --app-height:100vh;
+ --viewport-top:0px;
+ --safe-top:env(safe-area-inset-top,0px);
+ --safe-bottom:env(safe-area-inset-bottom,0px);
+ --safe-left:env(safe-area-inset-left,0px);
+ --safe-right:env(safe-area-inset-right,0px);
+}
+@supports(height:100dvh){:root{--app-height:100dvh}}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* This also covers iPad Pro landscape and narrow desktop/split-view windows. */
+@media(pointer:coarse),(max-width:1024px),(max-height:620px){
+ :root{
+  --hud-height:68px;
+  --footer-height:54px;
+  --content-top:calc(var(--safe-top) + var(--hud-height) + 10px);
+  --panel-height:max(120px,calc(var(--app-height) - var(--content-top) - var(--footer-height) - var(--safe-bottom)));
+ }
+ body{overscroll-behavior:none}
+ .cover,#play{top:var(--viewport-top);bottom:auto;height:var(--app-height)}
+ .hud{
+  top:var(--viewport-top);
+  height:calc(var(--hud-height) + var(--safe-top));
+  padding-top:var(--safe-top);
+  padding-left:max(4%,calc(var(--safe-left) + 10px));
+  padding-right:max(4%,calc(var(--safe-right) + 10px));
+  gap:10px;
+ }
+ .brand{flex-shrink:0}
+ .hud nav{min-width:0;white-space:nowrap}
+ .hud nav button{white-space:nowrap;flex-shrink:0}
+ .chapter-chip{top:calc(var(--safe-top) + var(--hud-height) + 8px);left:max(4.6%,calc(var(--safe-left) + 12px));max-width:53%}
+ .chapter-chip b{line-height:1.35;overflow-wrap:anywhere}
+ .chapter-chip small{line-height:1.5}
+ .progress{top:calc(var(--safe-top) + var(--hud-height) + 99px);left:max(4.6%,calc(var(--safe-left) + 12px))}
+ #reviewBar{top:calc(var(--safe-top) + var(--hud-height) + 4px);right:max(4%,calc(var(--safe-right) + 10px));max-width:40%;flex-wrap:wrap;line-height:1.5}
+ #reviewBar button{min-height:44px}
+ .save-mini{bottom:calc(8px + var(--safe-bottom));right:max(4%,calc(var(--safe-right) + 12px));min-height:44px}
+ .hint{bottom:calc(18px + var(--safe-bottom));white-space:normal;max-width:66%;text-align:center;line-height:1.5}
+ .phone,.puzzle,.ending-card,.is-choice{
+  top:calc(var(--content-top) + var(--panel-height) / 2);
+  bottom:auto;
+  max-height:var(--panel-height);
+  transform:translate(-50%,-50%);
+ }
+ .puzzle,.ending-card,.is-choice{
+  max-width:calc(100% - var(--safe-left) - var(--safe-right) - 24px);
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  scroll-padding-block:16px;
+ }
+ .phone{
+  height:min(720px,var(--panel-height));
+  max-width:calc(100% - var(--safe-left) - var(--safe-right) - 24px);
+ }
+ .phone-header{line-height:1.5;overflow-wrap:anywhere}
+ .chat-body{overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+ .chat-controls{max-height:44%;overflow-y:auto;overscroll-behavior-y:contain}
+ .chat-controls button{flex-shrink:0;min-height:44px}
+ .bubble{overflow-wrap:anywhere}
+ .dialogue-box:not(.is-choice){
+  bottom:calc(var(--footer-height) + var(--safe-bottom));
+  max-width:calc(100% - var(--safe-left) - var(--safe-right) - 24px);
+  max-height:min(44vh,calc(var(--panel-height) - 20px));
+  max-height:min(calc(var(--app-height) * .44),calc(var(--panel-height) - 20px));
+  min-height:min(215px,calc(var(--panel-height) - 20px));
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding-bottom:9px;
+ }
+ .dialogue-box:not(.is-choice) .speaker-line{flex-shrink:0}
+ .dialogue-box:not(.is-choice) #lineText{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior-y:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+ }
+ .dialogue-box:not(.is-choice) #nextBtn{position:static;flex-shrink:0;align-self:flex-end;margin-top:6px;min-height:44px}
+ #nodeCount{flex-shrink:0;white-space:nowrap}
+ .is-choice{overflow-y:auto}
+ .choice,.clue-option,.step,.memory-card,.collection-item,.chapter-link,.decision-link{overflow-wrap:anywhere;min-width:0}
+ .memory-grid,.endings-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .memory-card>span:last-child{min-width:0}
+ .chapter-link>span:nth-child(2){min-width:0;flex:1;overflow-wrap:anywhere}
+ .chapter-link small,.decision-link small{max-width:28%;white-space:normal;text-align:right;line-height:1.5}
+ .gold,.ghost{max-width:100%;overflow-wrap:anywhere}
+ .cover-actions{flex-wrap:wrap}
+ .cover-bottom{bottom:calc(26px + var(--safe-bottom));left:max(4%,calc(var(--safe-left) + 12px));right:max(4%,calc(var(--safe-right) + 12px));line-height:1.6}
+ .cover-card{scrollbar-width:thin;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+ .chapter-gate{overflow-y:auto;padding-top:calc(var(--safe-top) + var(--hud-height) + 20px);padding-bottom:calc(var(--safe-bottom) + 40px)}
+ .chapter-gate>*{flex-shrink:0}
+ .chapter-gate h2{overflow-wrap:anywhere}
+ .modal{
+  top:var(--viewport-top);bottom:auto;height:var(--app-height);
+  padding:calc(var(--safe-top) + 14px) max(12px,calc(var(--safe-right) + 12px)) calc(var(--safe-bottom) + 14px) max(12px,calc(var(--safe-left) + 12px));
+ }
+ .modal>article{width:min(760px,100%);max-height:100%;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scroll-padding-block:18px}
+ .modal h2{overflow-wrap:anywhere;padding-right:12px}
+ #closeModal{min-width:44px;min-height:44px}
+ .gallery-photo{max-height:calc(var(--app-height) * .62)}
+ .collection-item.memory-open{min-height:44px}
+ .letter-paper{overflow-wrap:anywhere}
+ input:not([type=range]){font-size:max(16px,1em)}
+ .pin-input{font-size:30px!important}
+ #toast{bottom:calc(18px + var(--safe-bottom));max-width:calc(100% - var(--safe-left) - var(--safe-right) - 24px);overflow-wrap:anywhere;line-height:1.7}
+}
+
+/* Phones, foldable outer displays, and iPad Slide Over / narrow split views. */
+@media(max-width:650px){
+ :root{--hud-height:68px;--cover-floor:max(calc(var(--app-height) * .14),calc(76px + var(--safe-bottom)))}
+ .hud{padding-left:max(12px,calc(var(--safe-left) + 8px));padding-right:max(10px,calc(var(--safe-right) + 8px));gap:4px}
+ .brand{padding:0;gap:4px}
+ .brand b{font-size:18px;letter-spacing:1px}
+ .hud nav{gap:1px}
+ .hud nav button,#helpBtn,#langBtn{min-height:44px;min-width:34px;padding:4px 5px;font-size:11px;letter-spacing:0}
+ #helpBtn{width:34px}
+ #collectionCount{margin-left:1px}
+ .cover-card{
+  top:auto;bottom:var(--cover-floor);transform:none;
+  left:max(8%,calc(var(--safe-left) + 16px));right:max(7%,calc(var(--safe-right) + 16px));
+  max-height:calc(var(--app-height) - var(--safe-top) - var(--hud-height) - var(--cover-floor) - 12px);
+  overflow-y:auto;
+ }
+ .cover h1{font-size:clamp(54px,17vw,69px)}
+ html.lang-en .cover h1{font-size:clamp(52px,16vw,64px)}
+ .cover .kicker{overflow-wrap:anywhere}
+ .cover .gold{min-width:126px}
+ .cover .gold,.cover .ghost{letter-spacing:.5px}
+ .cover .tip{line-height:1.7;letter-spacing:.6px}
+ .cover-bottom{left:8%;right:7%;font-size:9px}
+ .phone{width:min(402px,92%)}
+ .phone-header{padding:10px 12px}
+ .chat-controls{padding:10px 12px}
+ .puzzle,.is-choice{width:92%;padding:20px}
+ .puzzle h2{font-size:clamp(21px,6vw,24px);line-height:1.5}
+ .puzzle-photo{height:clamp(88px,calc(var(--app-height) * .16),150px)}
+ .dialogue-box:not(.is-choice){min-height:min(215px,calc(var(--panel-height) - 16px));max-height:min(calc(var(--app-height) * .39),calc(var(--panel-height) - 16px));padding:15px 18px 8px}
+ .chapter-chip b{font-size:16px}
+ .chapter-chip small{font-size:9px}
+ .letter-paper{padding:18px 16px}
+ .modal>article{padding:24px 20px}
+ .memory-detail{padding:24px 16px}
+ html.lang-en .choice,html.lang-en .task-description{line-height:1.65}
+}
+@media(max-width:380px){
+ .brand{gap:3px}.brand b{font-size:16px;letter-spacing:.5px}.brand>span{font-size:22px}
+ .hud nav{gap:0}
+ .hud nav button,#helpBtn,#langBtn{font-size:10px;padding-left:3px;padding-right:3px;min-width:30px}
+ #helpBtn{width:30px}
+ .cover h1{letter-spacing:9px}
+ .cover .quote{font-size:18px}
+ .cover .desc{font-size:12px}
+ .cover-actions{gap:8px}
+ .cover .gold{min-width:116px;padding:11px 15px}
+ .cover .ghost{padding:11px 12px}
+ .memory-grid,.endings-grid{grid-template-columns:1fr}
+ .decision-link small{max-width:38%}
+ .meal-choice{flex-basis:100px}
+ #lineText{font-size:16px}
+}
+
+/* Tablet portrait: retain complete scene framing and comfortably sized reading panels. */
+@media(min-width:651px) and (max-width:1100px) and (orientation:portrait){
+ .cover-card{left:7%;max-width:60%;max-height:calc(var(--app-height) - 230px);overflow-y:auto}
+ .cover h1{font-size:clamp(76px,10vw,104px)}
+ #sceneImage{object-fit:contain;top:12%;height:65%;object-position:center}
+ .phone{width:min(440px,66%)}
+ .puzzle{width:min(720px,86%);padding:28px 34px}
+ .task-description,.clue-option,.step{font-size:14px}
+ .bubble,.chat-choice,.chat-next,.chat-finish{font-size:14px}
+ .is-choice{width:min(760px,86%)}
+ .dialogue-box:not(.is-choice){width:91%;max-height:34vh;max-height:calc(var(--app-height) * .34);padding:23px 28px 10px;min-height:230px}
+ #lineText{font-size:21px}
+ .modal>article{padding:30px 34px}
+ .memory-card{font-size:14px}
+}
+
+/* Phone landscape: reserve the notch and navigation area; panels scroll instead of clipping. */
+@media(max-height:560px) and (orientation:landscape){
+ :root{--hud-height:48px;--footer-height:40px}
+ .hud{padding-left:max(4%,calc(var(--safe-left) + 12px));padding-right:max(4%,calc(var(--safe-right) + 12px))}
+ .brand{font-size:18px}.brand>span{font-size:24px}
+ .hud nav{gap:4px}.hud nav button,#helpBtn,#langBtn{min-height:44px;font-size:11px}
+ .cover-card{
+  left:max(7%,calc(var(--safe-left) + 16px));right:auto;top:calc(var(--safe-top) + var(--hud-height) + 6px);bottom:auto;
+  transform:none;width:min(530px,68%);max-width:none;
+  max-height:calc(var(--app-height) - var(--safe-top) - var(--safe-bottom) - var(--hud-height) - 52px);overflow-y:auto;
+ }
+ .cover h1,html.lang-en .cover h1{font-size:48px;line-height:1.15;margin:3px 0 10px}
+ .cover .kicker{margin-bottom:4px;font-size:8px}
+ .cover .quote{font-size:17px;margin-bottom:8px}
+ .cover .desc{font-size:12px;line-height:1.6}
+ .cover-actions{margin:12px 0 8px;gap:10px}
+ .cover .gold,.cover .ghost{min-height:44px;padding:8px 16px}
+ .cover .tip{font-size:9px;line-height:1.5}
+ .cover-bottom{bottom:calc(8px + var(--safe-bottom));font-size:9px}
+ .cover-bottom span:last-child{display:none}
+ .chapter-chip{top:calc(var(--safe-top) + var(--hud-height) + 3px);gap:0}
+ .chapter-chip span,.chapter-chip small{font-size:8px}.chapter-chip b{font-size:15px}
+ .progress{top:calc(var(--safe-top) + var(--hud-height) + 67px)}
+ .dialogue-box:not(.is-choice){min-height:122px;max-height:calc(var(--app-height) * .49);padding:9px 20px 5px}
+ .dialogue-box:not(.is-choice) .speaker-line{margin:0;min-height:18px}
+ #speaker{font-size:13px}#lineText{font-size:16px;line-height:1.6}
+ .dialogue-box:not(.is-choice) #nextBtn{margin-top:0}
+ #sceneImage{object-fit:contain;top:0;height:100%}
+ .phone{width:min(480px,72%);border-width:5px;border-radius:22px}
+ .phone-notch{height:7px}.phone-header{padding:5px 12px;font-size:11px}
+ .chat-body{padding:10px 14px;gap:10px}.chat-controls{padding:6px 10px;max-height:45%}
+ .puzzle,.is-choice,.ending-card{padding:16px 24px}
+ .puzzle h2{font-size:21px;margin:4px 0 8px}.puzzle .kicker{margin-bottom:4px}
+ .puzzle-photo{height:100px}.task-description{margin-bottom:10px}
+ .chapter-gate{justify-content:flex-start;padding-top:calc(var(--safe-top) + var(--hud-height) + 10px);padding-bottom:20px}
+ .chapter-gate h2{font-size:27px;line-height:1.3;margin:7px 0}
+ .gate-ornament{font-size:26px}.gate-time{margin:8px 0 15px}
+ .hint{bottom:calc(10px + var(--safe-bottom));font-size:8px}
+ .save-mini{bottom:var(--safe-bottom)}
+ .modal>article{padding:20px 26px}.modal h2{font-size:23px;margin-bottom:14px}
+ .gallery-photo{max-height:calc(var(--app-height) * .5)}
+}
+/* Safari's visual viewport shrinks while a numeric keyboard is present. */
+@media(pointer:coarse),(max-width:1024px){
+ html.input-open{--safe-bottom:0px;--footer-height:12px}
+ html.input-open .puzzle{max-height:var(--panel-height)}
+ html.input-open .puzzle-photo-button{display:none}
+ html.input-open .hint,html.input-open .save-mini{visibility:hidden}
+ html.input-open .archive-label{font-size:12px}
+}
+
+/* Keep complete illustrations visible. A softly blurred copy fills any letterbox space. */
+.cover{background:#2b2520}
+.cover::before{content:"";position:absolute;inset:-24px;background:url("assets/scene8.webp") center/cover no-repeat;filter:blur(18px) brightness(.58);transform:scale(1.04)}
+.cover-bg{position:relative;object-fit:contain;object-position:center}
+#sceneImage{object-fit:contain;object-position:center}
